@@ -6,9 +6,9 @@
 
         <p>
             Hello {{ number  }}, How are you doing?
-        </p>  
+        </p>
 
-        
+
         <p>
             Hello {{ date  }}, How are you doing?
         </p>
@@ -32,7 +32,7 @@ export default {
         },
         date: {
             type: String,
-            default: "" 
+            default: ""
         }
     },
     mounted() {
