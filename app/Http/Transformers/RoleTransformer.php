@@ -10,7 +10,7 @@ use Phattarachai\ThaiDate\ThaiDate;
 
 class RoleTransformer extends TransformerAbstract
 {
-    protected array $availableIncludes = ['image'];
+    protected array $availableIncludes = ['images'];
 
     public function transform(Role $role): array
     {
@@ -18,14 +18,13 @@ class RoleTransformer extends TransformerAbstract
         $data = [
             'id' => $role->id,
             'name' => $role->name,
-            'image' => $medias[0]->getFullUrl()
         ];
         return $data;
     }
 
-//    public function includeDocuments(Announcement $announcement)
-//    {
-//        $documents = $announcement->getMedia(Announcement::MEDIA_COLLECTION_DOCUMENTS);
-//        return $this->collection($documents, new AnnouncementDocumentTransformer());
-//    }
+    public function includeImages(Role $role)
+    {
+        $images = $role->getMedia(Role::MEDIA_COLLECTION_IMAGE);
+        return $this->collection($images, new RoleImageTransformer());
+    }
 }

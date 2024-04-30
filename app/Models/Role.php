@@ -19,7 +19,7 @@ class Role extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection(self::MEDIA_COLLECTION_IMAGE)->singleFile()
+        $this->addMediaCollection(self::MEDIA_COLLECTION_IMAGE)
             ->registerMediaConversions(function (Media $media) {
                 $this
                     ->addMediaConversion('optimized')
