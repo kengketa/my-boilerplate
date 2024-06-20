@@ -19,7 +19,7 @@ class AnnouncementController extends Controller
     public function index(Request $request)
     {
         $filters = $request->only(['category_id', 'type_id']);
-        $announcements = Announcement::filter($filters)->orderBy('start_date', 'desc')->paginate(30);
+        $announcements = Announcement::filter($filters)->orderBy('start_date', 'desc')->paginate(10);
         $announcementsData = fractal($announcements, new AnnouncementTransformer())->includeDocuments()->toArray();
         $allTypes = AnnouncementType::all()->toArray();
         $allCategories = AnnouncementCategory::all()->toArray();
