@@ -1,81 +1,48 @@
 <template>
-    <section
-        class="flex md:hidden w-full h-20 bg-blue-800 fixed top-0 text-white py-2 px-4 justify-between gap-4 text-xl items-center z-30">
-        <div class="flex gap-2 items-center">
-            <div>logo</div>
-            <div>name</div>
+    <div class="w-full">
+        <!-- แถบส่วนหัวสีฟ้า -->
+        <div class="w-full bg-[#92392f] h-10 flex items-center px-4 lg:px-32 fixed top-0 left-0 right-0 z-50">
+            <p class="text-white">Ayutthaya Studies Institute</p>
         </div>
-        <div class="dropdown dropdown-end">
-            <div class="border border-white p-2 rounded-md" role="button" tabindex="0">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
-                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round"
-                          stroke-linejoin="round"/>
-                </svg>
+        <!-- แถบส่วนหัวที่มีเงา -->
+        <div class="w-full shadow-md h-20 flex items-center justify-between px-4 lg:px-32 fixed top-10 left-0 right-0 z-50 bg-white">
+            <img src="https://www.aru.ac.th/asi/images/logo_asi3.png" alt="Logo" class="h-16 mr-2">
+            <!-- <Link class="flex items-center" :href="route('index')">
+                <h1 class="text-4xl font-bold uppercase">ARU</h1>
+                <h1 class="text-4xl font-bold text-blue-600">Teaching Materials</h1>
+            </Link> -->
+            <div class="flex gap-2">
+                <a href="https://www.aru.ac.th/asi"
+                    class="text-[#92392f] px-1 py-0.5 border-[#92392f] border-l-0 border-r-0 border-t-0 border-2 font-bold hidden lg:block"
+                    >
+                    Home
+                </a>
+                 <Link
+                    class="text-[#92392f] px-1 py-0.5 border-[#92392f] border-l-0 border-r-0 border-t-0 border-2 font-bold hidden lg:block ml-10"
+                    :href="route('login')">
+                    Login
+                </Link>
             </div>
-            <ul class="dropdown-content z-[1] menu p-2 shadow bg-blue-700 rounded-box w-52" tabindex="0">
-                <li><a>Item 1</a></li>
-                <li><a>Item 2</a></li>
-            </ul>
-        </div>
-    </section>
-    <section id="nav"
-             class="hidden md:flex w-full h-20 bg-blue-800 fixed top-0 text-white py-4 px-4 justify-evenly gap-4 text-xl items-center z-30">
-        <div class="flex gap-2">
-            <div>logo</div>
-            <div>name</div>
-        </div>
-        <div class="flex gap-4">
-            <div>skdfgdjsgfd</div>
-            <div>dfdsfdsfdsfdsf</div>
-            <div>sdfdsfdsfdsfdsfd</div>
-            <div>4dfsdfdsfdsfds</div>
-        </div>
-        <div v-if="$page.props.user === null">
-            <a :href="route('login')"
-               class="px-6 py-1.5 bg-white text-blue-800 rounded-md flex gap-2 items-center font-bold">
-                <div>
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5"
-                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"/>
+
+            <!-- เมนูมือถือ -->
+            <div class="block lg:hidden">
+                <button @click="toggleMenu" class="text-blue-600">
+                    <!-- ไอคอนสำหรับเมนูมือถือ (hamburger icon) -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
-                </div>
-                <p>เข้าสู่ระบบ</p>
-            </a>
-        </div>
-        <div v-if="$page.props.user !== null" class="flex gap-2 items-center">
-            <div class="flex-none gap-2 text-gray-500">
-                <div class="dropdown dropdown-end">
-                    <div class="btn btn-ghost btn-circle avatar" role="button" tabindex="0">
-                        <div class="w-10 rounded-full">
-                            <img alt="Tailwind CSS Navbar component"
-                                 src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"/>
-                        </div>
-                    </div>
-                    <ul class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-                        tabindex="0">
-                        <li>
-                            <Link :href="route('profile.show')" class="justify-between">
-                                Profile
-                            </Link>
-                        </li>
-                        <li>
-                            <Link :href="route('dashboard.index')" class="justify-between">
-                                Dashboard
-                            </Link>
-                        </li>
-                        <li>
-                            <button @click.prevent="logout">Logout</button>
-                        </li>
-                    </ul>
+                </button>
+                <!-- เมนูที่จะแสดงเมื่อกดปุ่ม -->
+                <div v-if="isMenuOpen" class="absolute bg-white shadow-lg rounded-lg mt-2 right-0">
+                    <a href="https://www.aru.ac.th/asi" class="block px-4 py-2 text-blue-600">Home</a>
+                    <Link class="block px-4 py-2 text-blue-600" :href="route('login')">Login</Link>
                 </div>
             </div>
-            <p class="text-sm">{{ $page.props.user.name }}</p>
         </div>
-    </section>
+        <div class="mt-32">
+
+        </div>
+    </div>
 </template>
 <script>
 import {Link} from "@inertiajs/inertia-vue3";
@@ -84,13 +51,24 @@ import {Inertia} from "@inertiajs/inertia";
 export default {
     name: "Nav",
     components: {Link},
-    data() {
-        return {};
+     data() {
+        return {
+            isMenuOpen: false,
+        }
     },
     methods: {
         logout() {
             Inertia.post(this.route('logout'));
+        },
+        toggleMenu() {
+            this.isMenuOpen = !this.isMenuOpen;
         }
     }
 };
 </script>
+<style scoped>
+/* เพื่อให้แน่ใจว่าส่วนหัวคงที่ไม่บดบังเนื้อหาของหน้าเว็บ */
+.mt-32 {
+    margin-top: 8rem; /* 2.5rem (h-10) + 5rem (h-20) = 7.5rem, เพิ่มเป็น 8rem */
+}
+</style>

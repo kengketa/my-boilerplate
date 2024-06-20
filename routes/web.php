@@ -16,15 +16,20 @@ if (Features::enabled(Features::registration())) {
     Route::post('/register', [PageController::class, 'storeRegister']);
 }
 
-
 Route::get('/', [PageController::class, 'index'])->name('index');
-Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
-Route::get('/get-all-announcements-type', [AnnouncementController::class, 'getAllAnnouncementTypes'])->name(
-    'announcements.get_all_announcement_types'
-);
-Route::get('/get-all-announcements-categories', [AnnouncementController::class, 'getAllAnnouncementCategories'])->name(
-    'announcements.get_all_announcement_categories'
-);
+
+
+
+
+
+
+// Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
+// Route::get('/get-all-announcements-type', [AnnouncementController::class, 'getAllAnnouncementTypes'])->name(
+//     'announcements.get_all_announcement_types'
+// );
+// Route::get('/get-all-announcements-categories', [AnnouncementController::class, 'getAllAnnouncementCategories'])->name(
+//     'announcements.get_all_announcement_categories'
+// );
 
 
 
